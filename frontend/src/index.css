@@ -47,6 +47,7 @@
   margin: auto;
   color: var(--text-light);
   text-align: center;
+  margin-bottom: 32px;
 }
 
 .btn {
