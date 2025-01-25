@@ -1,4 +1,4 @@
-import { Link } from "react-router"
+import { Link, NavLink } from "react-router"
 
 
 const Navbar = () => {
@@ -7,10 +7,14 @@ const Navbar = () => {
     <nav
       className="max-w-screen-2xl mx-auto px-4 flex justify-between items-center">
       <ul className="nav__links">
-        <li className="link"><Link to="/">Home</Link></li>
-        <li className="link"><Link to="/shop">Shop</Link></li>
-        <li className="link"><Link to="/">Pages</Link></li>
-        <li className="link"><Link to="/contact">Contact</Link></li>
+        <li className="link"><NavLink  className={({ isActive }) =>
+          isActive ? "active" : ""} to="/">Home</NavLink></li>
+        <li className="link"><NavLink className={({ isActive }) =>
+          isActive ? "active" : ""}  to="/shop">Shop</NavLink></li>
+        <li className="link"><NavLink className={({ isActive }) =>
+          isActive ? "active" : ""}  to="/pages">Pages</NavLink></li>
+        <li className="link"><NavLink className={({ isActive }) =>
+          isActive ? "active" : ""}  to="/contact">Contact</NavLink></li>
       </ul>
       <div className="nav__logo">
         <Link to="/">Lebaba<span>.</span></Link>

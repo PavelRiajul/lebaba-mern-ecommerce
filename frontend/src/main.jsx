@@ -7,6 +7,7 @@ import { BrowserRouter, Route, Routes } from "react-router";
 import Home from './pages/home/Home.jsx'
 import ShopPage from './pages/shop/ShopPage.jsx';
 import CategoryPage from './pages/category/CategoryPage.jsx';
+import ErrorPage from './components/ErrorPage.jsx';
 createRoot(document.getElementById('root')).render(
   <BrowserRouter>
     <Routes>
@@ -14,6 +15,8 @@ createRoot(document.getElementById('root')).render(
        <Route path='/' element={<Home/>}/>
        <Route path='/shop' element={<ShopPage/>}/>
        <Route path='/categories/:categoryName' element={<CategoryPage/>}/>  {/* single category route */}
+       {/* error page */}
+       <Route path='*' element={<ErrorPage/>}/>
       </Route>
     </Routes>
   </BrowserRouter>
