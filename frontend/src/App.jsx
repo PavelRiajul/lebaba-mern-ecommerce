@@ -1,11 +1,15 @@
 import { Outlet } from "react-router"
 import Navbar from "../src/components/Navbar/Navbar"
+import Footer from "./components/Footer"
 
 const App = () => {
   return (
     <>
      <Navbar/>
-      <Outlet/>
+     <main className="min-h-screen">
+     <Outlet/>
+     </main>
+      <Footer/>
     </>
   )
 }
