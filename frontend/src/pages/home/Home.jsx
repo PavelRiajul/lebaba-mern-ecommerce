@@ -1,5 +1,6 @@
 import Banner from "./Banner"
 import Categories from "./Categories"
+import Trends from "./Trends"
 
 
 const Home = () => {
@@ -7,6 +8,7 @@ const Home = () => {
     <div>
       <Banner/>
       <Categories/>
+      <Trends/>
     </div>
   )
 }
