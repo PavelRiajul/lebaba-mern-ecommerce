@@ -9,6 +9,7 @@ import ShopPage from './pages/shop/ShopPage.jsx';
 import CategoryPage from './pages/category/CategoryPage.jsx';
 import ErrorPage from './components/ErrorPage.jsx';
 import Login from './components/Login.jsx';
+import Register from './components/Register.jsx';
 createRoot(document.getElementById('root')).render(
   <BrowserRouter>
     <Routes>
@@ -21,6 +22,7 @@ createRoot(document.getElementById('root')).render(
       </Route>
       {/* authentication */}
       <Route path='/login' element={<Login/>}/>
+      <Route path='/register' element={<Register/>}/>
     </Routes>
   </BrowserRouter>
    
