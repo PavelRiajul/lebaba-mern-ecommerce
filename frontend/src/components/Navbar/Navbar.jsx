@@ -25,7 +25,8 @@ const Navbar = () => {
             <i className="ri-shopping-bag-line"></i><sup
               className="text-sm inline-block w-4 px-1.5 text-white rounded-full bg-[#ed3849] text-center">0</sup>
           </button>
-          <i className="ri-user-line  rounded-full cursor-pointer"></i>
+          <Link to={'/login'}> <i className="ri-user-line  rounded-full cursor-pointer"></i>
+          </Link>
           </span>
       </div>
     </nav>

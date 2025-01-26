@@ -8,6 +8,7 @@ import Home from './pages/home/Home.jsx'
 import ShopPage from './pages/shop/ShopPage.jsx';
 import CategoryPage from './pages/category/CategoryPage.jsx';
 import ErrorPage from './components/ErrorPage.jsx';
+import Login from './components/Login.jsx';
 createRoot(document.getElementById('root')).render(
   <BrowserRouter>
     <Routes>
@@ -18,6 +19,8 @@ createRoot(document.getElementById('root')).render(
        {/* error page */}
        <Route path='*' element={<ErrorPage/>}/>
       </Route>
+      {/* authentication */}
+      <Route path='/login' element={<Login/>}/>
     </Routes>
   </BrowserRouter>
    
