@@ -8,7 +8,7 @@ require('dotenv').config()
 //middleware
 app.use(express.json()) //express ta ke json a convert korte hobe . ta na korle backend a data pabo na
 app.use(cors({
-  origin:'http://localhost:5173/',
+  origin:'http://localhost:5173',
   credentials:true    //keno aejinish ta korbo, jokhon amra authentication releted kaj korbo amra frontend theke login korbo registration korbo tokhon amader  tokhon define korte hobe credentials:true karon, 
 }))
 //routes
