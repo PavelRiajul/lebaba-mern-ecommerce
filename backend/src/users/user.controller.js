@@ -4,7 +4,7 @@ const userRegistration = async (req,res)=>{
     try {
         const {username,email ,password}= req.body
         const user = new User({username, email,password})
-        await user.save()
+        await user.save() //kono akta data amara database a save korte ae save() method use korbo
         res.status(200).send({message:"Registration successful"})
 
     } catch (error) {
