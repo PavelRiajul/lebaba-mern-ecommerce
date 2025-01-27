@@ -21,6 +21,10 @@ const userSchema = new Schema({
 
     next()
   })
+  //compare password
+  userSchema.methods.comparePassword = function(candidatePassword){
+    return bcrypt.compare(candidatePassword,this.password)
+  }
 
   const User = model('User', userSchema);
   module.exports= User;
