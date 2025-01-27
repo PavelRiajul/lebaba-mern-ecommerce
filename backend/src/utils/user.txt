@@ -1,0 +1,14 @@
+Step-1:create a user model
+1. username
+2. email
+3. password
+4. profileImage
+5. bio
+6. profession
+7. role
+----------
+Step-2: create routes for user
+get:get info from data (data database theke ante kaj kore get)
+post:post info from client to db (frontend theke data backend a rakhte chaile)
+put/patch method: update or edit info (full/onek golo data update korle put use korbo) ( parsialy kono data update korle patch use korbo)
+delete:delete info from data
