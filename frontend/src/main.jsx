@@ -10,8 +10,11 @@ import CategoryPage from './pages/category/CategoryPage.jsx';
 import ErrorPage from './components/ErrorPage.jsx';
 import Login from './components/Login.jsx';
 import Register from './components/Register.jsx';
+import { Provider } from 'react-redux';
+import { store } from './redux/store.js';
 createRoot(document.getElementById('root')).render(
-  <BrowserRouter>
+  <Provider store={store}>
+<BrowserRouter>
     <Routes>
       <Route element={<App/>}>
        <Route path='/' element={<Home/>}/>
@@ -25,6 +28,8 @@ createRoot(document.getElementById('root')).render(
       <Route path='/register' element={<Register/>}/>
     </Routes>
   </BrowserRouter>
+  </Provider>
+  
    
  
 )
