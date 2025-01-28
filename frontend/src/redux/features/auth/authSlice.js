@@ -15,4 +15,18 @@ const initialState= loadUserFromLocalStorage()
 const authSlice = createSlice({
     name:'auth',
     initialState,
+    //user set
+    reducers:{
+        setUser:(state,action)=>{
+            state.user = action.payload.user;
+            localStorage.setItem('user',JSON.stringify(state.user))
+        },
+        //user logout
+        logout:()=>{
+            state.user = null;
+            localStorage.removeItem('user')
+        }
+    }
 })
+export const {setUser,logout} = authSlice.actions;
+export default authSlice.reducer;
