@@ -1,11 +1,15 @@
-import { useSelector } from "react-redux"
-import { Link, NavLink } from "react-router"
+import { useDispatch, useSelector } from "react-redux"
+import { Link, NavLink, useNavigate } from "react-router"
 import avatarImg from "../../assets/avatar.png"
 import { useState } from "react"
+import { logout } from "../../redux/features/auth/authSlice"
+import { useLogoutUserMutation } from "../../redux/features/auth/authApi"
 
 const Navbar = () => {
   const {user} = useSelector((state)=> state.auth)  //login korle user show dekhabe
   //login korle show dropdown menu show korbe user navigation manu
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
   const [isDropDownOpen,setIsDropDownOpen] = useState(false)
   const handleDropDownToogle = () =>{
     setIsDropDownOpen(!isDropDownOpen)
@@ -26,6 +30,18 @@ const Navbar = () => {
   ]
   //role based dropdown show
   const dropDownMenus = user?.role === "admin"? [...adminDropdownMenus]:[...userDropdownMenus]
+  //logout functionality
+  const [logoutUser]= useLogoutUserMutation()
+  const handleLogout= async()=>{
+      try {
+        await logoutUser().unwrap()
+        dispatch(logout())
+        alert("Logout successful!")
+        navigate('/')
+      } catch (error) {
+        console.error("Error logging out",error)
+      }
+  }
   return (
     <header className="fixed-nav-bar w-nav">
     <nav
@@ -60,11 +76,12 @@ const Navbar = () => {
                {
                 isDropDownOpen && (
                   <div className="absolute right-0 mt-3 w-48 bg-white p-4 border-gray-200 rounded-b-lg shadow-lg z-50">
-                    <ul>
+                    <ul className="font-medium space-y-4 p-2">
                       {
                         dropDownMenus.map((menu,index)=>(
                           <li key={index}>
                             <Link
+                            className="dropdown-items"
                              onClick={()=> handleDropDownToogle(false)}
                             to={menu.path}>
                             {menu.label}
@@ -72,6 +89,9 @@ const Navbar = () => {
                           </li>
                         ))
                       }
+                        <li>
+                          <Link className="dropdown-items" onClick={handleLogout}>Logout</Link>
+                        </li>
                     </ul>
                   </div>
                 )

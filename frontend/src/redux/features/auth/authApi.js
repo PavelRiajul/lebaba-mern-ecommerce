@@ -1,5 +1,6 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 import { getBaseUrl } from '../../../utils/getBaseUrl';
+import { logout } from './authSlice';
 
 
 //query: get methods
@@ -25,8 +26,15 @@ const authApi = createApi({
                 method:"POST",
                 body:credentials
             })
+        }),
+        logoutUser: builder.mutation({
+            query:()=>({
+                url:"/logout",
+                method:"POST"
+            })
         })
+
     })
 })
-export const {useLoginUserMutation,useRegisterUserMutation} = authApi
+export const {useLoginUserMutation,useRegisterUserMutation,useLogoutUserMutation} = authApi
 export default authApi;
