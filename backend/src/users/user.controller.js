@@ -74,9 +74,40 @@ const userLogout = async(req,res)=>{
   }
  }
 
+ //delete user
+ const deleteUser =async(req,res)=>{
+    const {id} = req.params
+   try {
+    const user = await User.findByIdAndDelete(id)
+    if(!user){
+       return  errorResponse(res,404,"User not found!")
+    }
+    return successResponse(res,200,"Users deleted successfully!")
+   } catch (error) {
+    errorResponse(res,500,"Failed to delete users!",error)
+   }
+ }
+ //update user role
+ const updateUserRole=async(req,res)=>{
+    const {id} = req.params
+    const {role}=req.body
+   try {
+    const updateUser= await User.findByIdAndUpdate(id,{role},{new:true})
+    if(!updateUser){
+        return  errorResponse(res,404,"User not found!")
+     }
+     return successResponse(res,200,"User role update successfully!", data=updateUser)
+   } catch (error) {
+    errorResponse(res,500,"Failed to update user role!",error)
+
+   }
+ }
+
 module.exports ={
     userRegistration,
     userLoggedIn,
     userLogout,
-    getAllUsers
+    getAllUsers,
+    deleteUser,
+    updateUserRole
 }

@@ -1,5 +1,5 @@
 const express = require('express');
-const { userRegistration, userLoggedIn, userLogout, getAllUsers } = require('./user.controller');
+const { userRegistration, userLoggedIn, userLogout, getAllUsers, deleteUser, updateUserRole } = require('./user.controller');
 const verifyToken = require('../middleware/verifyToken');
 const verifyAdmin = require('../middleware/verifyAdmin');
 const router = express.Router();
@@ -14,4 +14,11 @@ router.post('/login',userLoggedIn)
 router.post('/logout',userLogout)
 //get all users endpoints (token verify and admin)
 router.get('/users',verifyToken,verifyAdmin,getAllUsers)
+
+//delete user endpoint (only admin)
+router.delete('/users/:id',verifyToken,verifyAdmin,deleteUser)
+
+//update user tole by admin
+router.put('/users/:id',verifyToken,verifyAdmin,updateUserRole)
+
 module.exports=router;
