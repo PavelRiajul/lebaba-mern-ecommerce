@@ -103,11 +103,34 @@ const userLogout = async(req,res)=>{
    }
  }
 
+ //edit user profile
+ const editUserProfile=async(req,res)=>{
+   const {id}=req.params;
+   const {username,profileImage,bio,profession} = req.body
+   try {
+    const updateFields={
+        username,
+        profileImage,
+        bio,
+        profession
+    }
+    const updateUser = await User.findByIdAndUpdate(id,updateFields,{new:true})
+    if(!updateUser){
+        return errorResponse(res,404,"User not found!",error)
+    }
+    return  successResponse(res,200,"User profile update successfully!", updateUser)
+   } catch (error) {
+        errorResponse(res,500,"Failed to update user profile!",error)
+
+   }
+ }
+
 module.exports ={
     userRegistration,
     userLoggedIn,
     userLogout,
     getAllUsers,
     deleteUser,
-    updateUserRole
+    updateUserRole,
+    editUserProfile
 }
