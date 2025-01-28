@@ -13,7 +13,10 @@ app.use(cors({
 }))
 //routes
 const userRoutes = require("./src/users/user.route")
+const productsRouts = require("./src/products/product.route")
+
 app.use('/api/auth',userRoutes)
+app.use('/api/products',productsRouts)
 async function main() {
   await mongoose.connect(process.env.DB_URL);  //mongodb database connection url .env file
 
