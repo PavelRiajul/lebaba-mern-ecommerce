@@ -11,6 +11,7 @@ export const store = configureStore({
         auth:authReducer,
         [productsApi.reducerPath]: productsApi.reducer,
         [reviewsApi.reducerPath]: reviewsApi.reducer,
+      
     },
     middleware: (getDefaultMiddleware) =>
         getDefaultMiddleware().concat(authApi.middleware,productsApi.middleware,reviewsApi.middleware)

@@ -2,6 +2,7 @@
  import ProductCards from "./ProductCards"
 import { useFetchAllProdutsQuery } from "../../redux/features/products/productsApi"
 import { useState } from "react"
+import ShopFiltering from "./ShopFiltering"
 
 const filters ={
   categories:['all',"accessories","dress","jewellery","cosmetics"],
@@ -20,7 +21,7 @@ const ShopPage = () => {
     priceRange:''
   })
   const {category,color,priceRange}=filterState;
-  const [ minPrice,maxPrice]=priceRange.split('_').map(Number)
+  const [ minPrice,maxPrice]=priceRange.split('-').map(Number)
   const [currentPage,setCurrentPage]= useState(1)
   const [productsPerPage]= useState(8)
   const {data:productData = {},error, isLoading} = useFetchAllProdutsQuery({
@@ -40,6 +41,14 @@ const ShopPage = () => {
         setCurrentPage(pageNumber)
       }
   }
+  // clear filters
+  const clearFilters = ()=>{
+    setFilterState({
+      category:'all',
+      color:'all',
+      priceRange:''
+    })
+  }
 
   const startProduct = (currentPage -1) * productsPerPage+1
   const endProduct = startProduct + products.length -1
@@ -52,26 +61,36 @@ const ShopPage = () => {
 
     <section className="section__container">
       <div className="flex flex-col md:flex-row md:gap-12 gap-8">
+        {/* category */}
         <div>
-          category
+          <ShopFiltering
+          filters={filters}
+          filterState={filterState}
+          setFilterState={setFilterState}
+          clearFilters={clearFilters}
+          />
         </div>
+        {/* product grid */}
         <div>
            <h3 className="text-xl font-medium mb-4">Showing {startProduct} to {endProduct} of {totalProducts} products</h3>
            <ProductCards products={products}/>         {/*important */}
            {/* pagination */}
-           <div className="flex justify-center space-x-2 mt-6">
-           <button onClick={()=>handlePageChange(currentPage - 1)} className="px-4 py-2 rounded-md bg-gray-200 text-gray-700">Previous</button>
            {
-            [...Array(totalPages)].map((_,index)=>(
-              <button
-              disabled={currentPage == 1}
-              onClick={()=>handlePageChange(index+1)}
-              className={`px-4 py-2 rounded-md ${ currentPage == index +1 ? 'bg-blue-500 text-white':'bg-gray-200 text-gray-700'}`} 
-               key={index}>{index+1}</button>
-            ))
+            products.length > 0 && <div className="flex justify-center space-x-2 mt-6">
+            <button onClick={()=>handlePageChange(currentPage - 1)} className="px-4 py-2 rounded-md bg-gray-200 text-gray-700">Previous</button>
+            {
+             [...Array(totalPages)].map((_,index)=>(
+               <button
+               disabled={currentPage == 1}
+               onClick={()=>handlePageChange(index+1)}
+               className={`px-4 py-2 rounded-md ${ currentPage == index +1 ? 'bg-blue-500 text-white':'bg-gray-200 text-gray-700'}`} 
+                key={index}>{index+1}</button>
+             ))
+            }
+            <button disabled={currentPage == totalPages} onClick={()=>handlePageChange(currentPage + 1)} className="px-4 py-2 rounded-md bg-gray-200 text-gray-700">Next</button>
+            </div>
            }
-           <button disabled={currentPage == totalPages} onClick={()=>handlePageChange(currentPage + 1)} className="px-4 py-2 rounded-md bg-gray-200 text-gray-700">Next</button>
-           </div>
+           
         </div>
       </div>
     </section>
@@ -80,3 +99,7 @@ const ShopPage = () => {
 }
 
 export default ShopPage
+
+
+
+

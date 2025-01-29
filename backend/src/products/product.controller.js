@@ -37,7 +37,7 @@ const getAllProducts =async(req,res)=>{
         if( minPrice && maxPrice){
             const min = parseFloat(minPrice)
             const max = parseFloat(maxPrice)
-            if(!isNAN(min) && !isNAN(max)){
+            if(!isNaN(min) && !isNaN(max)){
                 filter.price = {$gte:min, $lte:max}
             }
         }
@@ -119,3 +119,9 @@ module.exports = {
     updateProductById,
     deleteProductById
 }
+
+
+
+
+
+

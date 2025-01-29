@@ -20,3 +20,7 @@ router.patch("/update-product/:id",verifyToken,verifyAdmin,updateProductById)
 router.delete("/:id",verifyToken,verifyAdmin,deleteProductById)
 
 module.exports = router
+
+
+
+
