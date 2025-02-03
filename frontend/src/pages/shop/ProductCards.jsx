@@ -1,3 +1,4 @@
+import { Link } from "react-router"
 import Rating from "../../components/Rating"
 
 
@@ -9,11 +10,11 @@ const ProductCards = ({products}) => {
             products.length > 0 ? (products.map((product,index)=>(
               <div key={index} className="product__card">
               <div className="relative">
-                <a href="/shop/66d45fb27e580755d843823e">
+                <Link to={`/shop/${product._id}`}>
                   <img
                     src={product?.image}
                     alt="Men Casual tShirt"
-                    className="max-h-96 md:h-64 w-full object-cover hover:scale-105 transition-all duration-300"/></a>
+                    className="max-h-96 md:h-64 w-full object-cover hover:scale-105 transition-all duration-300"/></Link>
                 <div className="hover:block absolute top-3 right-3">
                   <button>
                     <i

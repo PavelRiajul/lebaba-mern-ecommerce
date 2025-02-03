@@ -3,6 +3,7 @@
 import { useFetchAllProdutsQuery } from "../../redux/features/products/productsApi"
 import { useState } from "react"
 import ShopFiltering from "./ShopFiltering"
+import Loading from "../../components/Loading"
 
 const filters ={
   categories:['all',"accessories","dress","jewellery","cosmetics"],
@@ -32,7 +33,7 @@ const ShopPage = () => {
     page:currentPage,
     limit:productsPerPage
   })
-  if(isLoading) return <p>Loading...</p>
+  if(isLoading) return <Loading/>
   const{products,totalPages,totalProducts} = productData?.data || {};
 
   //pagination
