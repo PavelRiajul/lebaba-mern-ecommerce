@@ -1,6 +1,6 @@
 import { useState } from "react"
 import { useSelector } from "react-redux"
-import { useParams } from "react-router"
+import { useNavigate, useParams } from "react-router"
 import { useFetchProductbyIdQuery } from "../../../redux/features/products/productsApi"
 import { usePostReviewMutation } from "../../../redux/features/reviews/reviewsApi"
 
@@ -18,6 +18,7 @@ const PostAReview = ({isModalOpen,handleClose}) => {
         setRating(value)
     }
     const [postReview] = usePostReviewMutation()
+    const navigate = useNavigate()
     
 
     const handleSubmit =async (e)=>{
@@ -27,6 +28,11 @@ const PostAReview = ({isModalOpen,handleClose}) => {
             rating:rating,
             userId:user?._id,
             productId:id
+        }
+        if(!user){
+            alert("You must be logged in to post a review")
+            navigate('/login')
+            return
         }
         try {
             const response = await postReview(newReview).unwrap()
